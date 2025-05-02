@@ -16,10 +16,13 @@ public class BaseController : MonoBehaviour
     private Vector2 knockback = Vector2.zero;
     private float knockbackDuration = 0.0f;
 
+    protected AnimationHandler animationHandler;
+    protected StatHandler statHandler;
     protected virtual void Awake()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
-
+        animationHandler = GetComponent<AnimationHandler>();
+        statHandler = GetComponent<StatHandler>();
     }
     protected virtual void Start()
     { }
@@ -44,7 +47,7 @@ public class BaseController : MonoBehaviour
 
     private void Movement(Vector2 direction)
     {
-        direction = direction * 5;//입력된 방향 벡터의 크기를 5배로 증폭. 속도값처럼 처리하는 연산
+        direction = direction * statHandler.Speed;//입력된 방향 벡터의 크기를 5배로 증폭. 속도값처럼 처리하는 연산
         if (knockbackDuration > 0.0f)
         {
             direction *= 0.2f;
@@ -54,7 +57,7 @@ public class BaseController : MonoBehaviour
         //        Rigidbody의 속도(velocity) 를 아예 direction으로 설정
         // 물리적으로 밀어내거나 움직이는 게 아니라 강제로 속도를 지정해서 이동을 만드는 구조
         //넉백 중에도 약간의 조작은 가능하지만,대부분의 힘은 강제로 밀리는 방향으로 흐르게 하는 구조
-        
+        animationHandler.Move(direction);
 
     }
 
