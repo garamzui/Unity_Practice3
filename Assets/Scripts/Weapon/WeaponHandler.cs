@@ -12,6 +12,7 @@ public class WeaponHandler : MonoBehaviour
     [SerializeField] public float power = 1f;
     public float Power { get => power; set => power = value; }
     [SerializeField] private float speed = 1f;
+    public float Speed { get => speed; set => speed = value; }
     [SerializeField] private float attackRange = 10f;
     public float AttackRange { get => attackRange; set => attackRange = value; }
     public LayerMask target;

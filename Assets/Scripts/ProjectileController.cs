@@ -42,11 +42,11 @@ public class ProjectileController : MonoBehaviour
         _rigidbody.velocity = direction * rangeWeaponHandler.Speed;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)//충돌 가능한지 판단하는 함수
     {
         if (levelCollisionLayer.value == (levelCollisionLayer.value | (1 << collision.gameObject.layer)))
         {
-            DestroyProjectile(collision.ClosestPoint(transform.position) - direction * .2f, fxOnDestory);
+            DestroyProjectile(collision.ClosestPoint/*가까운부분*/(transform.position) - direction * .2f, fxOnDestory);
         }
         else if (rangeWeaponHandler.target.value == (rangeWeaponHandler.target.value | (1 << collision.gameObject.layer)))
         {
@@ -79,3 +79,6 @@ public class ProjectileController : MonoBehaviour
         Destroy(this.gameObject);
     }
 }
+
+
+
