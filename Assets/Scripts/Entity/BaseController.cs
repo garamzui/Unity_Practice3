@@ -18,11 +18,22 @@ public class BaseController : MonoBehaviour
 
     protected AnimationHandler animationHandler;
     protected StatHandler statHandler;
+   
+    [SerializeField] public WeaponHandler WeaponPrefab;
+    protected WeaponHandler weaponHandler;
+
+    protected bool isAttacking;
+    private float timeSinceLastAttack = float.MaxValue;
+
     protected virtual void Awake()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
         animationHandler = GetComponent<AnimationHandler>();
         statHandler = GetComponent<StatHandler>();
+
+        if (WeaponPrefab != null)
+            weaponHandler = Instantiate(WeaponPrefab, weaponPivot);
+        else weaponHandler = GetComponentInChildren<WeaponHandler>();
     }
     protected virtual void Start()
     { }
@@ -30,6 +41,7 @@ public class BaseController : MonoBehaviour
     {
         HandleAction();
         Rotate(lookDirection);
+        HandleAttackDelay();    
 
     }
 
@@ -71,6 +83,8 @@ public class BaseController : MonoBehaviour
         {
             weaponPivot.rotation = Quaternion.Euler(0f,0f,rotZ);
         }
+
+        weaponHandler?.Rotate(isLeft);
     }
 
     public void ApplyKnockback(Transform other, float power, float duration) //knockback의 방향과 시간 매서드
@@ -80,5 +94,31 @@ public class BaseController : MonoBehaviour
         knockback = -(other.position - transform.position).normalized * power; // 방향만 필요하기에 nomalized를 이용해 vector의 길이를 1로 만듦
     }
 
+    private void HandleAttackDelay() // 일정 시간마다 공격을 호출하게 
+    {
+        if (weaponHandler == null)
+            return;
+
+        if (timeSinceLastAttack <= weaponHandler.Delay)
+        {
+            timeSinceLastAttack += Time.deltaTime;
+        }
+
+        if (isAttacking && timeSinceLastAttack > weaponHandler.Delay)
+        {
+            timeSinceLastAttack = 0;
+            Attack();
+        }
+    }
+
+    protected virtual void Attack()
+    {
+        if (lookDirection != Vector2.zero)
+            weaponHandler?.Attack();
+    }
 
 }
+
+
+
+
