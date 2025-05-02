@@ -55,7 +55,7 @@ public class ProjectileController : MonoBehaviour
     }
 
 
-    public void Init(Vector2 direction, RangeWeaponHandler weaponHandler)
+    public void Init(Vector2 direction, RangeWeaponHandler weaponHandler,ProjectileManager projectileManager)
     {
         rangeWeaponHandler = weaponHandler;
 

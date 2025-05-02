@@ -127,7 +127,7 @@ GameObject:
   - component: {fileID: 6780162719430861708}
   - component: {fileID: 7284730742527983782}
   - component: {fileID: 4726872821058546677}
-  - component: {fileID: 25586248747824249}
+  - component: {fileID: 4489943767943370784}
   m_Layer: 0
   m_Name: Skull
   m_TagString: Untagged
@@ -223,7 +223,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.5, y: 0.5}
   m_EdgeRadius: 0
---- !u!114 &25586248747824249
+--- !u!114 &4489943767943370784
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
