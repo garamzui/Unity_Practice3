@@ -157,10 +157,11 @@ MonoBehaviour:
   power: 2
   speed: 1
   attackRange: 10
+  attackSoundClip: {fileID: 8300000, guid: b6358329f3acc0e428d5068fca3901e2, type: 3}
   target:
     serializedVersion: 2
     m_Bits: 64
-  isOnKnockback: 0
+  isOnKnockback: 1
   knockbackPower: 3
   knockbackTime: 0.1
   projectileSpawnPosition: {fileID: 7553488766450116589}
